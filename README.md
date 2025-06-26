@@ -1,10 +1,61 @@
-### Installation
+# Autodock-GPU_Postprocessing
+Automated large-scale post-processing for AutoDock-GPU Molecular Docking
+
+## Installation
 Tested with Python 3.12.5
 Complete dependency list for all tools in the requirements.txt
 
-### Basic Usage
+```bash
+# Install dependencies
+pip install -r requirements.txt
 
-#### ProLIF Analysis
+# Optional: Install PyMOL for PDBQT to PDB conversion
+conda install -c conda-forge pymol-open-source
+```
+
+## How to Run
+
+The project consists of several Python scripts that can be run directly:
+
+### 1. Protein-Ligand Interaction Analysis
+```bash
+# Basic interaction analysis
+python interaction_analysis.py --protein protein.pdb --ligands ligand_directory/
+
+# Single ligand analysis with 2D mode
+python interaction_analysis.py --protein protein.pdb --ligands single_ligand.pdb --mode 2d
+
+# Use configuration file
+python interaction_analysis.py --config my_config.yaml
+```
+
+### 2. AutoDock Pipeline Processing
+```bash
+# Complete AutoDock pipeline
+python main.py \
+  --train_dlg_dir train_data/ \
+  --test_dlg_dir test_data/ \
+  --output_dir results/
+
+# Show all available options
+python main.py --help
+```
+
+### 3. Individual Tools
+```bash
+# PDBQT screening
+python screening_pdbqt.py --input_dir pdbqt_files/ --output_dir screened/
+
+# Convert PDBQT to PDB
+python convert_pdbqt_to_pdb.py --input file.pdbqt --output file.pdb
+
+# Process datasets
+python process_datasets.py --train_dlg_dir Data/Train/ --test_dlg_dir Data/Test/
+```
+
+## Basic Usage
+
+### ProLIF Analysis
 ```bash
 # Analyze protein-ligand interactions
 python interaction_analysis.py --protein protein.pdb --ligands ligand_directory/
@@ -16,7 +67,7 @@ python interaction_analysis.py --protein protein.pdb --ligands single_ligand.pdb
 python interaction_analysis.py --config my_config.yaml
 ```
 
-#### AutoDock Pipeline
+### AutoDock Pipeline
 ```bash
 # Complete pipeline
 python main.py \
@@ -86,6 +137,7 @@ results/
         ├── compound1.pdbqt
         └── ...
 ```
+
 ## 🔧 Advanced Usage
 
 ### Integration Workflow
